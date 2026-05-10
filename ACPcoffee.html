@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACP Coffee | Order Online</title>
+    <title>ACP Coffee | Full Menu</title>
     <style>
         :root {
             --light-blue: #E3F2FD;
@@ -17,112 +17,97 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         body { background-color: var(--light-blue); color: var(--text); line-height: 1.6; }
 
-        /* Header & Nav */
         header { background-color: var(--header-blue); color: var(--white); padding: 2rem 0; text-align: center; border-bottom: 5px solid var(--accent-yellow); }
         nav { background-color: var(--dark-blue); padding: 1rem; text-align: center; position: sticky; top: 0; z-index: 100; display: flex; justify-content: center; align-items: center; gap: 20px; }
         nav a { color: var(--white); text-decoration: none; font-weight: bold; cursor: pointer; }
         
         .basket-btn { background: var(--accent-yellow); color: var(--dark-blue); padding: 8px 15px; border-radius: 20px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .basket-btn:hover { background: var(--white); }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 2rem 20px; }
-        .section-title { text-align: center; color: var(--dark-blue); margin: 2rem 0; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem 20px; }
+        .category-title { color: var(--dark-blue); margin: 3rem 0 1rem; padding-bottom: 10px; border-bottom: 3px solid var(--accent-yellow); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Menu */
-        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .menu-item { background: var(--white); padding: 1.5rem; border-radius: 15px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 2px solid transparent; transition: 0.3s; }
-        .menu-item:hover { border-color: var(--header-blue); transform: translateY(-3px); }
-        .price { color: var(--header-blue); font-weight: bold; font-size: 1.2rem; display: block; margin: 10px 0; }
+        /* Menu Grid */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
+        .menu-item { background: var(--white); padding: 1.2rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; }
+        .menu-item h3 { font-size: 1.1rem; color: var(--header-blue); margin-bottom: 5px; }
+        .menu-item p { font-size: 0.85rem; color: #666; margin-bottom: 10px; }
+        .price { font-weight: bold; color: var(--dark-blue); margin-bottom: 10px; display: block; }
 
         /* Buttons */
-        .btn { background: var(--header-blue); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; }
-        .btn:hover { background: var(--dark-blue); }
+        .add-btn { background: var(--light-blue); color: var(--dark-blue); border: 1px solid var(--header-blue); padding: 8px; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        .add-btn:hover { background: var(--header-blue); color: white; }
+        .btn-checkout { background: var(--header-blue); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; }
 
-        /* Modal / Basket Tab */
-        #basket-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-content { background: var(--white); padding: 2rem; border-radius: 15px; width: 90%; max-width: 500px; max-height: 80vh; overflow-y: auto; }
-        .basket-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+        /* Modal */
+        #basket-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background: var(--white); padding: 2rem; border-radius: 15px; width: 90%; max-width: 450px; max-height: 85vh; display: flex; flex-direction: column; }
+        #basket-items-list { overflow-y: auto; flex-grow: 1; margin: 15px 0; border-top: 1px solid #eee; }
+        .basket-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 0.95rem; }
 
-        /* Forms */
         .hidden { display: none; }
-        .card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--light-blue); border-radius: 8px; }
-
-        #success-page { text-align: center; padding: 3rem; background: var(--white); border-radius: 20px; }
+        .card { background: white; padding: 2rem; border-radius: 15px; max-width: 500px; margin: 0 auto; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>ACP Coffee</h1>
-        <p>Fresh Brews & Golden Moments</p>
+        <p>30+ Ways to Brighten Your Day</p>
     </header>
 
     <nav>
-        <a onclick="showSection('menu-section')">Menu</a>
-        <button class="basket-btn" onclick="toggleBasket()">🛒 View Basket (<span id="cart-count-nav">0</span>)</button>
+        <a onclick="showSection('menu-section')">Full Menu</a>
+        <button class="basket-btn" onclick="toggleBasket()">🛒 Basket (<span id="cart-count-nav">0</span>)</button>
     </nav>
 
     <div class="container">
         
-        <!-- Menu Section -->
         <section id="menu-section">
-            <h2 class="section-title">Coffee & Pastries</h2>
-            <div class="menu-grid">
-                <!-- Items -->
-                <div class="menu-item">
-                    <h3>Iced Latte</h3>
-                    <p>Refreshing espresso with chilled milk.</p>
-                    <span class="price">$4.50</span>
-                    <button class="btn" onclick="addToCart('Iced Latte', 4.50)">Add to Basket</button>
-                </div>
-                <div class="menu-item">
-                    <h3>Golden Muffin</h3>
-                    <p>Lemon and poppyseed delight.</p>
-                    <span class="price">$3.95</span>
-                    <button class="btn" onclick="addToCart('Golden Muffin', 3.95)">Add to Basket</button>
-                </div>
-                <div class="menu-item">
-                    <h3>Blueberry Danish</h3>
-                    <p>Sweet glaze and fresh berries.</p>
-                    <span class="price">$4.25</span>
-                    <button class="btn" onclick="addToCart('Blueberry Danish', 4.25)">Add to Basket</button>
-                </div>
-            </div>
+            <!-- COFFEE & DRINKS (12 items) -->
+            <h2 class="category-title">Signature Brews</h2>
+            <div class="menu-grid" id="coffee-grid"></div>
+
+            <!-- BAKERY (10 items) -->
+            <h2 class="category-title">The Bakery</h2>
+            <div class="menu-grid" id="bakery-grid"></div>
+
+            <!-- BRUNCH (8 items) -->
+            <h2 class="category-title">All-Day Brunch</h2>
+            <div class="menu-grid" id="brunch-grid"></div>
         </section>
 
-        <!-- Checkout: Address -->
+        <!-- Checkout Screens -->
         <section id="address-section" class="hidden">
-            <h2 class="section-title">Delivery Address</h2>
+            <h2 class="section-title" style="text-align: center; margin: 2rem;">Delivery Details</h2>
             <div class="card">
-                <input type="text" id="custName" placeholder="Your Name">
-                <input type="text" id="custAddress" placeholder="Full Delivery Address">
-                <button class="btn" onclick="showSection('payment-section')">Go to Payment</button>
+                <input type="text" id="custName" placeholder="Full Name">
+                <input type="text" id="custAddress" placeholder="123 Sunshine Blvd, London">
+                <button class="btn-checkout" onclick="showSection('payment-section')">Continue to Payment</button>
             </div>
         </section>
 
-        <!-- Checkout: Payment -->
         <section id="payment-section" class="hidden">
-            <h2 class="section-title">Fake Payment</h2>
+            <h2 class="section-title" style="text-align: center; margin: 2rem;">Secure Checkout</h2>
             <div class="card">
-                <p>Total: <strong id="pay-total"></strong></p>
-                <input type="text" placeholder="Card Number">
+                <p>Total Order Value: <strong id="pay-total"></strong></p>
+                <input type="text" placeholder="Card Number" maxlength="16">
                 <div style="display:flex; gap:10px;">
-                    <input type="text" placeholder="MM/YY">
-                    <input type="text" placeholder="CVC">
+                    <input type="text" placeholder="MM/YY" maxlength="5">
+                    <input type="text" placeholder="CVV" maxlength="3">
                 </div>
-                <button class="btn" style="background:#2ecc71" onclick="processPayment()">Pay Securely</button>
+                <button class="btn-checkout" style="background:#2ecc71" onclick="processPayment()">Complete Purchase</button>
             </div>
         </section>
 
-        <!-- Success -->
-        <section id="success-page" class="hidden">
-            <h2 style="color: #2ecc71">Order Confirmed! ☕</h2>
-            <p>Your ACP Coffee is being prepared.</p>
-            <div style="background: var(--accent-yellow); padding: 1rem; margin: 1rem 0; border-radius: 10px;">
-                <strong>ETA: 22 Minutes</strong>
+        <section id="success-page" class="hidden" style="text-align:center; padding: 4rem 0;">
+            <h1 style="color:#2ecc71; font-size: 3rem;">☕ Success!</h1>
+            <p>Order received. We are warming up the ovens!</p>
+            <div style="background:var(--accent-yellow); display:inline-block; padding: 1rem 2rem; border-radius: 50px; margin: 2rem 0; font-weight:bold;">
+                Estimated Delivery: 28 Minutes
             </div>
-            <button class="btn" onclick="location.reload()">Start New Order</button>
+            <br>
+            <button class="btn-checkout" style="width:200px" onclick="location.reload()">Return Home</button>
         </section>
 
     </div>
@@ -130,59 +115,105 @@
     <!-- Basket Modal -->
     <div id="basket-modal">
         <div class="modal-content">
-            <h2 style="color: var(--dark-blue); margin-bottom: 1rem;">Your Basket</h2>
-            <div id="basket-items-list">
-                <!-- Items appear here -->
-            </div>
-            <div style="margin-top: 1.5rem; border-top: 2px solid var(--accent-yellow); padding-top: 10px;">
-                <p><strong>Total: $<span id="basket-total-price">0.00</span></strong></p>
+            <h2 style="color: var(--dark-blue);">Your Selections</h2>
+            <div id="basket-items-list"></div>
+            <div style="padding-top: 15px; font-size: 1.2rem;">
+                <strong>Total: $<span id="basket-total-price">0.00</span></strong>
             </div>
             <div style="display: flex; gap: 10px; margin-top: 1rem;">
-                <button class="btn" style="background:#666" onclick="toggleBasket()">Close</button>
-                <button class="btn" onclick="startCheckout()">Checkout</button>
+                <button class="btn-checkout" style="background:#888" onclick="toggleBasket()">Back</button>
+                <button class="btn-checkout" onclick="startCheckout()">Checkout</button>
             </div>
-            <button onclick="clearCart()" style="background:none; border:none; color:red; cursor:pointer; margin-top:10px; font-size:0.8rem;">Clear All Items</button>
         </div>
     </div>
 
     <script>
+        const menuData = {
+            brews: [
+                {n: "Espresso", p: 2.50, d: "Bold and intense."},
+                {n: "Americano", p: 3.00, d: "Espresso with hot water."},
+                {n: "Cappuccino", p: 4.25, d: "Frothy and classic."},
+                {n: "Flat White", p: 4.25, d: "Velvety microfoam."},
+                {n: "Vanilla Latte", p: 4.75, d: "Sweetened with Madagascar vanilla."},
+                {n: "Caramel Macchiato", p: 4.95, d: "Layered with caramel drizzle."},
+                {n: "Mocha", p: 5.00, d: "Rich chocolate espresso."},
+                {n: "Cold Brew", p: 4.50, d: "12-hour cold steep."},
+                {n: "Iced Matcha Latte", p: 5.25, d: "Premium ceremonial grade."},
+                {n: "Chai Tea Latte", p: 4.75, d: "Spiced black tea mix."},
+                {n: "Hot Chocolate", p: 3.95, d: "Real cocoa and marshmallows."},
+                {n: "Iced Peach Tea", p: 3.50, d: "Refreshing summer classic."}
+            ],
+            bakery: [
+                {n: "Plain Croissant", p: 3.50, d: "Buttery and flaky."},
+                {n: "Almond Croissant", p: 4.25, d: "Topped with sliced almonds."},
+                {n: "Pain au Chocolat", p: 3.95, d: "Filled with dark chocolate."},
+                {n: "Blueberry Muffin", p: 3.25, d: "Real Maine blueberries."},
+                {n: "Banana Bread", p: 3.50, d: "Toasted with butter."},
+                {n: "Cinnamon Roll", p: 4.50, d: "Cream cheese frosting."},
+                {n: "Lemon Drizzle Cake", p: 3.75, d: "Zesty and moist."},
+                {n: "Double Choc Cookie", p: 2.50, d: "Soft-baked goodness."},
+                {n: "Fruit Scone", p: 3.50, d: "Served with jam & cream."},
+                {n: "Oatmeal Raisin Cookie", p: 2.50, d: "Chewy and spiced."}
+            ],
+            brunch: [
+                {n: "Avocado Toast", p: 9.50, d: "Sourdough, chili flakes, lime."},
+                {n: "Eggs Benedict", p: 11.00, d: "Poached eggs and hollandaise."},
+                {n: "Pancake Stack", p: 10.50, d: "Maple syrup and berries."},
+                {n: "Smoked Salmon Bagel", p: 8.95, d: "Cream cheese and capers."},
+                {n: "Bacon Roll", p: 5.50, d: "Smoked bacon in a brioche bun."},
+                {n: "Granola Bowl", p: 7.25, d: "Greek yogurt and honey."},
+                {n: "Smashed Peas on Toast", p: 8.50, d: "Feta and mint on rye."},
+                {n: "Breakfast Burrito", p: 9.95, d: "Eggs, beans, cheese, salsa."}
+            ]
+        };
+
         let cart = [];
+
+        function initMenu() {
+            renderGrid('coffee-grid', menuData.brews);
+            renderGrid('bakery-grid', menuData.bakery);
+            renderGrid('brunch-grid', menuData.brunch);
+        }
+
+        function renderGrid(id, items) {
+            const grid = document.getElementById(id);
+            items.forEach(item => {
+                grid.innerHTML += `
+                    <div class="menu-item">
+                        <div>
+                            <h3>${item.n}</h3>
+                            <p>${item.d}</p>
+                        </div>
+                        <div>
+                            <span class="price">$${item.p.toFixed(2)}</span>
+                            <button class="add-btn" onclick="addToCart('${item.n}', ${item.p})">Add to Order</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
 
         function addToCart(name, price) {
             cart.push({name, price});
-            updateBasketUI();
+            updateUI();
         }
 
-        function updateBasketUI() {
+        function updateUI() {
+            document.getElementById('cart-count-nav').innerText = cart.length;
             const list = document.getElementById('basket-items-list');
-            const countNav = document.getElementById('cart-count-nav');
-            const totalDisplay = document.getElementById('basket-total-price');
-            
-            list.innerHTML = cart.length === 0 ? "<p>Your basket is empty.</p>" : "";
-            
             let total = 0;
-            cart.forEach((item) => {
-                const div = document.createElement('div');
-                div.className = 'basket-item';
-                div.innerHTML = `<span>${item.name}</span> <span>$${item.price.toFixed(2)}</span>`;
-                list.appendChild(div);
+            list.innerHTML = "";
+            cart.forEach(item => {
+                list.innerHTML += `<div class="basket-item"><span>${item.name}</span><span>$${item.price.toFixed(2)}</span></div>`;
                 total += item.price;
             });
-
-            countNav.innerText = cart.length;
-            totalDisplay.innerText = total.toFixed(2);
+            document.getElementById('basket-total-price').innerText = total.toFixed(2);
             document.getElementById('pay-total').innerText = "$" + total.toFixed(2);
         }
 
         function toggleBasket() {
-            const modal = document.getElementById('basket-modal');
-            modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
-        }
-
-        function clearCart() {
-            cart = [];
-            updateBasketUI();
-            toggleBasket();
+            const m = document.getElementById('basket-modal');
+            m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
         }
 
         function showSection(id) {
@@ -192,10 +223,7 @@
         }
 
         function startCheckout() {
-            if(cart.length === 0) {
-                alert("Basket is empty!");
-                return;
-            }
+            if(cart.length === 0) return alert("Basket is empty!");
             toggleBasket();
             showSection('address-section');
         }
@@ -203,6 +231,8 @@
         function processPayment() {
             showSection('success-page');
         }
+
+        initMenu();
     </script>
 </body>
 </html>
