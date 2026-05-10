@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACP Coffee | Full Menu</title>
+    <title>ACP Coffee | Order Online</title>
     <style>
         :root {
             --light-blue: #E3F2FD;
@@ -26,19 +26,16 @@
         .container { max-width: 1000px; margin: 0 auto; padding: 2rem 20px; }
         .category-title { color: var(--dark-blue); margin: 3rem 0 1rem; padding-bottom: 10px; border-bottom: 3px solid var(--accent-yellow); text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Menu Grid */
         .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; }
         .menu-item { background: var(--white); padding: 1.2rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: space-between; }
         .menu-item h3 { font-size: 1.1rem; color: var(--header-blue); margin-bottom: 5px; }
         .menu-item p { font-size: 0.85rem; color: #666; margin-bottom: 10px; }
         .price { font-weight: bold; color: var(--dark-blue); margin-bottom: 10px; display: block; }
 
-        /* Buttons */
         .add-btn { background: var(--light-blue); color: var(--dark-blue); border: 1px solid var(--header-blue); padding: 8px; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.2s; }
         .add-btn:hover { background: var(--header-blue); color: white; }
         .btn-checkout { background: var(--header-blue); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; }
 
-        /* Modal */
         #basket-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; justify-content: center; align-items: center; }
         .modal-content { background: var(--white); padding: 2rem; border-radius: 15px; width: 90%; max-width: 450px; max-height: 85vh; display: flex; flex-direction: column; }
         #basket-items-list { overflow-y: auto; flex-grow: 1; margin: 15px 0; border-top: 1px solid #eee; }
@@ -53,61 +50,58 @@
 
     <header>
         <h1>ACP Coffee</h1>
-        <p>30+ Ways to Brighten Your Day</p>
+        <p>Expertly Roasted. Delivered Fresh.</p>
     </header>
 
     <nav>
-        <a onclick="showSection('menu-section')">Full Menu</a>
-        <button class="basket-btn" onclick="toggleBasket()">🛒 Basket (<span id="cart-count-nav">0</span>)</button>
+        <a onclick="showSection('menu-section')">Menu</a>
+        <button class="basket-btn" onclick="toggleBasket()">🛒 Basket (£<span id="basket-total-nav">0.00</span>)</button>
     </nav>
 
     <div class="container">
         
         <section id="menu-section">
-            <!-- COFFEE & DRINKS (12 items) -->
-            <h2 class="category-title">Signature Brews</h2>
+            <h2 class="category-title">Brews & Drinks</h2>
             <div class="menu-grid" id="coffee-grid"></div>
 
-            <!-- BAKERY (10 items) -->
-            <h2 class="category-title">The Bakery</h2>
+            <h2 class="category-title">Fresh Bakery</h2>
             <div class="menu-grid" id="bakery-grid"></div>
 
-            <!-- BRUNCH (8 items) -->
-            <h2 class="category-title">All-Day Brunch</h2>
+            <h2 class="category-title">Brunch Specials</h2>
             <div class="menu-grid" id="brunch-grid"></div>
         </section>
 
-        <!-- Checkout Screens -->
+        <!-- Checkout Sections -->
         <section id="address-section" class="hidden">
             <h2 class="section-title" style="text-align: center; margin: 2rem;">Delivery Details</h2>
             <div class="card">
                 <input type="text" id="custName" placeholder="Full Name">
-                <input type="text" id="custAddress" placeholder="123 Sunshine Blvd, London">
+                <input type="text" id="custAddress" placeholder="Street Address, London, UK">
                 <button class="btn-checkout" onclick="showSection('payment-section')">Continue to Payment</button>
             </div>
         </section>
 
         <section id="payment-section" class="hidden">
-            <h2 class="section-title" style="text-align: center; margin: 2rem;">Secure Checkout</h2>
+            <h2 class="section-title" style="text-align: center; margin: 2rem;">Secure Payment</h2>
             <div class="card">
-                <p>Total Order Value: <strong id="pay-total"></strong></p>
+                <p>Total to Pay: <strong id="pay-total"></strong></p>
                 <input type="text" placeholder="Card Number" maxlength="16">
                 <div style="display:flex; gap:10px;">
                     <input type="text" placeholder="MM/YY" maxlength="5">
                     <input type="text" placeholder="CVV" maxlength="3">
                 </div>
-                <button class="btn-checkout" style="background:#2ecc71" onclick="processPayment()">Complete Purchase</button>
+                <button class="btn-checkout" style="background:#2ecc71" onclick="processPayment()">Pay Now</button>
             </div>
         </section>
 
         <section id="success-page" class="hidden" style="text-align:center; padding: 4rem 0;">
-            <h1 style="color:#2ecc71; font-size: 3rem;">☕ Success!</h1>
-            <p>Order received. We are warming up the ovens!</p>
+            <h1 style="color:#2ecc71; font-size: 3rem;">☕ Cheers!</h1>
+            <p>Payment successful. Your order is being prepared.</p>
             <div style="background:var(--accent-yellow); display:inline-block; padding: 1rem 2rem; border-radius: 50px; margin: 2rem 0; font-weight:bold;">
-                Estimated Delivery: 28 Minutes
+                Estimated Delivery: 25 Minutes
             </div>
             <br>
-            <button class="btn-checkout" style="width:200px" onclick="location.reload()">Return Home</button>
+            <button class="btn-checkout" style="width:200px" onclick="location.reload()">New Order</button>
         </section>
 
     </div>
@@ -115,13 +109,13 @@
     <!-- Basket Modal -->
     <div id="basket-modal">
         <div class="modal-content">
-            <h2 style="color: var(--dark-blue);">Your Selections</h2>
+            <h2 style="color: var(--dark-blue);">Current Basket</h2>
             <div id="basket-items-list"></div>
             <div style="padding-top: 15px; font-size: 1.2rem;">
-                <strong>Total: $<span id="basket-total-price">0.00</span></strong>
+                <strong>Total: £<span id="basket-total-price">0.00</span></strong>
             </div>
             <div style="display: flex; gap: 10px; margin-top: 1rem;">
-                <button class="btn-checkout" style="background:#888" onclick="toggleBasket()">Back</button>
+                <button class="btn-checkout" style="background:#888" onclick="toggleBasket()">Close</button>
                 <button class="btn-checkout" onclick="startCheckout()">Checkout</button>
             </div>
         </div>
@@ -130,40 +124,40 @@
     <script>
         const menuData = {
             brews: [
-                {n: "Espresso", p: 2.50, d: "Bold and intense."},
-                {n: "Americano", p: 3.00, d: "Espresso with hot water."},
-                {n: "Cappuccino", p: 4.25, d: "Frothy and classic."},
-                {n: "Flat White", p: 4.25, d: "Velvety microfoam."},
-                {n: "Vanilla Latte", p: 4.75, d: "Sweetened with Madagascar vanilla."},
-                {n: "Caramel Macchiato", p: 4.95, d: "Layered with caramel drizzle."},
-                {n: "Mocha", p: 5.00, d: "Rich chocolate espresso."},
-                {n: "Cold Brew", p: 4.50, d: "12-hour cold steep."},
-                {n: "Iced Matcha Latte", p: 5.25, d: "Premium ceremonial grade."},
-                {n: "Chai Tea Latte", p: 4.75, d: "Spiced black tea mix."},
-                {n: "Hot Chocolate", p: 3.95, d: "Real cocoa and marshmallows."},
-                {n: "Iced Peach Tea", p: 3.50, d: "Refreshing summer classic."}
+                {n: "Espresso", p: 2.20, d: "Rich and dark."},
+                {n: "Americano", p: 2.80, d: "Espresso over hot water."},
+                {n: "Cappuccino", p: 3.50, d: "Classic frothy coffee."},
+                {n: "Flat White", p: 3.40, d: "Velvety smooth milk."},
+                {n: "Vanilla Latte", p: 3.95, d: "Sweet Madagascar vanilla."},
+                {n: "Caramel Macchiato", p: 4.10, d: "Sweet caramel drizzle."},
+                {n: "Mocha", p: 4.00, d: "Chocolate & espresso blend."},
+                {n: "Cold Brew", p: 3.80, d: "Slow-steeped for 12 hours."},
+                {n: "Iced Matcha Latte", p: 4.50, d: "Pure ceremonial grade."},
+                {n: "Chai Latte", p: 3.90, d: "Spiced aromatic tea."},
+                {n: "Hot Chocolate", p: 3.50, d: "Premium cocoa with cream."},
+                {n: "Earl Grey", p: 2.50, d: "Premium loose leaf tea."}
             ],
             bakery: [
-                {n: "Plain Croissant", p: 3.50, d: "Buttery and flaky."},
-                {n: "Almond Croissant", p: 4.25, d: "Topped with sliced almonds."},
-                {n: "Pain au Chocolat", p: 3.95, d: "Filled with dark chocolate."},
-                {n: "Blueberry Muffin", p: 3.25, d: "Real Maine blueberries."},
-                {n: "Banana Bread", p: 3.50, d: "Toasted with butter."},
-                {n: "Cinnamon Roll", p: 4.50, d: "Cream cheese frosting."},
-                {n: "Lemon Drizzle Cake", p: 3.75, d: "Zesty and moist."},
-                {n: "Double Choc Cookie", p: 2.50, d: "Soft-baked goodness."},
-                {n: "Fruit Scone", p: 3.50, d: "Served with jam & cream."},
-                {n: "Oatmeal Raisin Cookie", p: 2.50, d: "Chewy and spiced."}
+                {n: "Butter Croissant", p: 2.95, d: "Flaky and golden."},
+                {n: "Almond Croissant", p: 3.50, d: "Sweet almond filling."},
+                {n: "Pain au Chocolat", p: 3.20, d: "Double chocolate center."},
+                {n: "Blueberry Muffin", p: 2.80, d: "Freshly baked today."},
+                {n: "Banana Bread", p: 3.00, d: "Toasted with salted butter."},
+                {n: "Cinnamon Swirl", p: 3.40, d: "Gooey icing topper."},
+                {n: "Lemon Cake Slice", p: 3.20, d: "Zesty lemon drizzle."},
+                {n: "Choc Chip Cookie", p: 1.95, d: "Soft and chewy."},
+                {n: "Fruit Scone", p: 3.50, d: "Clotted cream & jam."},
+                {n: "Shortbread", p: 1.50, d: "Traditional buttery biscuit."}
             ],
             brunch: [
-                {n: "Avocado Toast", p: 9.50, d: "Sourdough, chili flakes, lime."},
-                {n: "Eggs Benedict", p: 11.00, d: "Poached eggs and hollandaise."},
-                {n: "Pancake Stack", p: 10.50, d: "Maple syrup and berries."},
-                {n: "Smoked Salmon Bagel", p: 8.95, d: "Cream cheese and capers."},
-                {n: "Bacon Roll", p: 5.50, d: "Smoked bacon in a brioche bun."},
-                {n: "Granola Bowl", p: 7.25, d: "Greek yogurt and honey."},
-                {n: "Smashed Peas on Toast", p: 8.50, d: "Feta and mint on rye."},
-                {n: "Breakfast Burrito", p: 9.95, d: "Eggs, beans, cheese, salsa."}
+                {n: "Avocado on Toast", p: 8.50, d: "Poached eggs & chili flakes."},
+                {n: "Full ACP Breakfast", p: 10.95, d: "The works, on one plate."},
+                {n: "Blueberry Pancakes", p: 8.95, d: "Maple syrup stack."},
+                {n: "Salmon Bagel", p: 7.50, d: "Cream cheese and dill."},
+                {n: "Bacon Brioche", p: 4.95, d: "Crispy smoked bacon."},
+                {n: "Granola Bowl", p: 6.50, d: "Yogurt and fresh berries."},
+                {n: "Halloumi Wrap", p: 7.25, d: "Roasted peppers and pesto."},
+                {n: "Breakfast Burrito", p: 8.50, d: "Eggs, avocado, and salsa."}
             ]
         };
 
@@ -185,7 +179,7 @@
                             <p>${item.d}</p>
                         </div>
                         <div>
-                            <span class="price">$${item.p.toFixed(2)}</span>
+                            <span class="price">£${item.p.toFixed(2)}</span>
                             <button class="add-btn" onclick="addToCart('${item.n}', ${item.p})">Add to Order</button>
                         </div>
                     </div>
@@ -199,16 +193,21 @@
         }
 
         function updateUI() {
-            document.getElementById('cart-count-nav').innerText = cart.length;
             const list = document.getElementById('basket-items-list');
+            const totalNav = document.getElementById('basket-total-nav');
+            const totalPrice = document.getElementById('basket-total-price');
+            const payTotal = document.getElementById('pay-total');
+            
             let total = 0;
             list.innerHTML = "";
             cart.forEach(item => {
-                list.innerHTML += `<div class="basket-item"><span>${item.name}</span><span>$${item.price.toFixed(2)}</span></div>`;
+                list.innerHTML += `<div class="basket-item"><span>${item.name}</span><span>£${item.price.toFixed(2)}</span></div>`;
                 total += item.price;
             });
-            document.getElementById('basket-total-price').innerText = total.toFixed(2);
-            document.getElementById('pay-total').innerText = "$" + total.toFixed(2);
+            
+            totalNav.innerText = total.toFixed(2);
+            totalPrice.innerText = total.toFixed(2);
+            payTotal.innerText = "£" + total.toFixed(2);
         }
 
         function toggleBasket() {
