@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,8 +19,11 @@
     <meta name="theme-color" content="#4a3728">
 
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
     <header>
@@ -67,14 +71,87 @@
         </div>
     </section>
 
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&q=80&w=900"
+                    alt="Barista preparing artisan coffee">
+            </div>
+            <div class="about-text">
+                <h2>Our Story</h2>
+                <p class="tagline">Crafting moments of warmth, one cup at a time.</p>
+                <p>Founded in 2020, The Daily Grind began with a simple passion: elevating your everyday coffee ritual.
+                    We partner directly with sustainable coffee growers worldwide to source ethically harvested beans,
+                    roasted in small batches to preserve their nuanced aroma and deep flavor profile.</p>
+                <div class="about-highlights">
+                    <div class="highlight-item">
+                        <span class="icon">☕</span>
+                        <div>
+                            <h4>Artisanal Roasting</h4>
+                            <p>Precision small-batch roasts developed for rich, complex notes.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="icon">🌱</span>
+                        <div>
+                            <h4>100% Fair Trade</h4>
+                            <p>Direct partnerships supporting ethical, sustainable family farms.</p>
+                        </div>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="icon">🥐</span>
+                        <div>
+                            <h4>Fresh Daily Bakes</h4>
+                            <p>Warm pastries and treats baked fresh each morning to pair with your brew.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="contact" class="contact-section">
-        <h2>Join Our Coffee Club</h2>
-        <p>Drop your email to get a 10% discount on your first visit!</p>
-        <form id="contactForm">
-            <input type="email" id="emailInput" placeholder="Enter your email" required>
-            <button type="submit" class="btn">Subscribe</button>
-        </form>
-        <p id="formFeedback" class="hidden"></p>
+        <div class="contact-header">
+            <h2>Visit Us & Get In Touch</h2>
+            <p>Whether you're stopping by for your morning brew or have a question, we'd love to connect.</p>
+        </div>
+
+        <div class="contact-container">
+            <!-- Contact Details Cards -->
+            <div class="contact-info-grid">
+                <div class="info-card">
+                    <div class="info-icon">📍</div>
+                    <h3>Location</h3>
+                    <p>142 Artisan Lane<br>Covent Garden, London WC2E 8HD</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">📞</div>
+                    <h3>Phone</h3>
+                    <p><a href="tel:+442079460912">+44 (0) 20 7946 0912</a><br>Daily during cafe hours</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">✉️</div>
+                    <h3>Email</h3>
+                    <p><a href="mailto:hello@thedailygrind.com">hello@thedailygrind.com</a><br>Inquiries & orders</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">⏰</div>
+                    <h3>Opening Hours</h3>
+                    <p>Mon – Fri: 7:00 AM – 7:00 PM<br>Sat – Sun: 8:00 AM – 6:00 PM</p>
+                </div>
+            </div>
+
+            <!-- Coffee Club Newsletter -->
+            <div class="newsletter-card">
+                <h3>Join Our Coffee Club</h3>
+                <p>Drop your email to get a 10% discount on your first visit and exclusive roast updates!</p>
+                <form id="contactForm">
+                    <input type="email" id="emailInput" placeholder="Enter your email" required>
+                    <button type="submit" class="btn">Subscribe</button>
+                </form>
+                <p id="formFeedback" class="hidden"></p>
+            </div>
+        </div>
     </section>
 
     <footer>
@@ -83,4 +160,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
