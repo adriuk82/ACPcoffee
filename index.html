@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Grind | Coffee Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="logo">The Daily Grind</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="cart-icon" id="cartBtn">🛒 <span id="cart-count">0</span></div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Freshly Brewed, <br>Just for You</h1>
+            <p>Start your morning with our locally sourced, artisanal coffee blends.</p>
+            <a href="#menu" class="btn">Explore Menu</a>
+        </div>
+    </section>
+
+    <section id="menu" class="menu-section">
+        <h2>Our Popular Brews</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <h3>Espresso</h3>
+                <p>Rich, bold, and concentrated shot of pure energy.</p>
+                <span class="price">$3.50</span>
+                <button class="add-to-cart">Add to Order</button>
+            </div>
+            <div class="menu-item">
+                <h3>Cafe Latte</h3>
+                <p>Smooth espresso balanced with steamed milk and light foam.</p>
+                <span class="price">$4.50</span>
+                <button class="add-to-cart">Add to Order</button>
+            </div>
+            <div class="menu-item">
+                <h3>Cappuccino</h3>
+                <p>Equal parts espresso, steamed milk, and thick froth.</p>
+                <span class="price">$4.50</span>
+                <button class="add-to-cart">Add to Order</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2>Join Our Coffee Club</h2>
+        <p>Drop your email to get a 10% discount on your first visit!</p>
+        <form id="contactForm">
+            <input type="email" id="emailInput" placeholder="Enter your email" required>
+            <button type="submit" class="btn">Subscribe</button>
+        </form>
+        <p id="formFeedback" class="hidden"></p>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 The Daily Grind. Crafted with ❤️ for coffee lovers.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
